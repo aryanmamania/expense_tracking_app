@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Piggybank from '../assests/image_processing20210622-19269-nqurux.gif'; 
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   background-color: white;
@@ -43,10 +43,12 @@ const Title = styled.h1`
 
 const Input = styled.input`
   background-color: #eee;
-  border: none;
+  border: 1px solid black;
+  border-radius: 25px; 
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
+  border-radius: 25px; /* Add this line for oval shape */
 `;
 
 const Button = styled.button`
@@ -61,15 +63,6 @@ const Button = styled.button`
   text-transform: uppercase;
   margin-top: 20px;
   margin-bottom: -10px;
-`;
-
-const StyledLink = styled(Link)`
-  color: #ffffff;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
 `;
 
 const OverlayContainer = styled.div`
@@ -137,6 +130,8 @@ const Paragraph = styled.p`
 `;
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <SignUpContainer>
@@ -146,9 +141,7 @@ const SignUp = () => {
           <Input type="email" placeholder="Email" />
           <Input type="password" placeholder="Password" />
           <Button>Sign Up</Button>
-          <Button>
-            <StyledLink to="login">Sign In</StyledLink>
-          </Button>
+          <Button onClick={() => navigate('/login')}>Sign In</Button>
         </Form>
       </SignUpContainer>
 
@@ -166,6 +159,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-
-

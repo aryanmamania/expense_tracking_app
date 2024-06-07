@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Piggybank from '../assests/image_processing20210622-19269-nqurux.gif';
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Container = styled.div`
   background-color: white;
@@ -43,10 +45,19 @@ const Title = styled.h1`
 
 const Input = styled.input`
   background-color: #eee;
-  border: none;
-  padding: 12px 15px;
+  border: 1px solid black; /* Make the border bold */
+  border-radius: 25px; /* Add border-radius for oval shape */
+  padding: 12px 40px 12px 15px; /* Adjust padding to accommodate the eye icon */
   margin: 8px 0;
   width: 100%;
+  position: relative;
+`;
+
+const IconContainer = styled.div`
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
 `;
 
 const Button = styled.button`
@@ -61,15 +72,7 @@ const Button = styled.button`
   text-transform: uppercase;
   margin-top: 20px;
   margin-bottom: -10px;
-`;
-
-const StyledLink = styled(Link)`
-  color: #ffffff;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  text-decoration: none; /* Remove text decoration for buttons */
 `;
 
 const OverlayContainer = styled.div`
@@ -136,18 +139,36 @@ const Paragraph = styled.p`
   margin: 20px 0 30px;
 `;
 
+const Title1 = styled.p`
+  padding-top: 10px;
+  cursor: pointer;
+`;
+
 const Login = () => {
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <Container>
       <SignUpContainer>
         <Form>
           <Title>WELCOME BACK</Title>
-          <Input type="text" placeholder="Name" />
-          <Input type="password" placeholder="Password" />
+          <Input type="text" placeholder="Username" />
+          <Input type={showPassword ? "text" : "password"} placeholder="Password" />
+          <IconContainer>
+            <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye}
+              onClick={togglePasswordVisibility}
+              style={{ cursor: 'pointer' }}
+            />
+          </IconContainer>
           <Button>Sign In</Button>
-          <Button>
-            <StyledLink to="/">Sign Up</StyledLink>
-          </Button>
+          <Button onClick={() => navigate('/')}>Sign Up</Button>
+          <Title1 onClick={() => navigate('/otp')}>Forgot Password ?</Title1>
         </Form>
       </SignUpContainer>
 
@@ -165,4 +186,6 @@ const Login = () => {
 };
 
 export default Login;
+
+
 
