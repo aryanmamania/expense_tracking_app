@@ -5,11 +5,15 @@ import Login from './components/login';
 import SignUp from './components/signUp'; 
 import OTP from './components/otp';
 import './App.css';
+import { MainLayout } from './styles/MainLayout';
 
 
 function App() {
   return (
-     <BrowserRouter>
+    <MainLayout>
+
+
+<BrowserRouter>
      
      <Routes>
               <Route path="/" element={<SignUp />} />
@@ -18,6 +22,8 @@ function App() {
           </Routes>
      
      </BrowserRouter>
+    </MainLayout>
+    
   
   );
 }
